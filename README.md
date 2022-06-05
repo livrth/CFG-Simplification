@@ -10,6 +10,8 @@ Team Member:
 - [x] Review the CFG Simplification
 - [ ] Try to remove useless symbol
 
+--- 
+
 __Some ideas and problems encountered__
 
 Example Input:
@@ -37,6 +39,41 @@ G->gG
 - 直接将 A 代入 P 产生式得到 P->ppP|abB|epsilon|P, 那么此时P->epsilon 是可达的, 但是如何处理 P->P, 以及如何用代码实现“代入” ?
 
 到底 A 和 P 的推导关系该如何处理才能得到正确结果, 同时保证 DFS 不会无限递归陷入死循环?
+
+--- 
+
+
+__6.6 Update__
+```
+A -> B | C | D
+B -> bB | E | F
+E -> eE | c
+F -> eF | G
+G -> gG | b
+```
+每一项大写字母都DFS 任意一项可达就是可达的
+
+有环情况:
+```
+A -> B | C | D
+C -> A | E
+B -> bB
+D -> dD 
+E -> eE
+```
+A 是不可达的 无用式子
+防止环出现就搜过的不再搜了, 而且遇到环的话返回是 false
+举例: A -> C, C -> A | E
+
+此时 C -> A 发现 A 已被标记搜过，那么这一项 DFS(A)  = false
+
+然后去 DFS(E) 最后返回的结果就是 DFA(A) || DFS(E)
+
+A -> A | B | C 这种应该化简为 A -> B | C, A->A 是要去掉的
+
+如果只有 A -> A, 那么A就无法到达结束符，A 也是无用式子
+
+---
 
 __Reference__
 
