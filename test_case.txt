@@ -26,7 +26,7 @@ B -> bB
 D -> dD 
 E -> eE
 
---- 
+--- for useless symbol
 
 9
 S A P B C D E F G
@@ -40,3 +40,34 @@ D -> ddd
 E -> eE | F
 F -> fF | G
 G -> gG
+
+
+--- for epsilon case
+7
+S A B X Y C D
+7
+S -> XYX | A | B
+A -> bBX | aCbC
+B -> bbb | BX | D
+D -> C
+X -> aX | epsilon
+Y -> bY | epsilon
+C -> epsilon
+
+remove epsilon output:
+
+S -> XYX | XY | YX | XX | X | Y | A | B
+A -> bBX | bB | aCbC | abC | aCb | ab
+B -> bbb | BX | B | D
+D -> C
+X -> aX | a
+Y -> bY | b
+
+
+remove useless another time:
+
+S -> XYX | XY | YX | XX | X | Y | A | B
+A -> bBX | bB | aCbC | abC | aCb | ab
+B -> bbb | BX | B
+X -> aX | a
+Y -> bY | b

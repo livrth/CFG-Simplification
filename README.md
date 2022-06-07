@@ -96,4 +96,6 @@ __Reference__
 
 - [Tutorial in English 2](https://www.tutorialspoint.com/automata_theory/cfg_simplification.htm)
 
+- [LLVM  Simplify and canonicalize the CFG](https://llvm.org/doxygen/SimplifyCFG_8h_source.html)
+
 - [Simplification of context-free grammar through Petri net](https://www.academia.edu/5233442/Simplification_of_context_free_grammar_through_Petri_net)
