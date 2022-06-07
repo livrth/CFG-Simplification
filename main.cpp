@@ -285,7 +285,11 @@ void solve() {
         }
     }
 
+    //消无用
     remove_useless();
+    out_dbg(all_production);
+
+    //消空 
     remove_epsilon();
 
     rebuild_graph(); //重新建图 消去 epsilon 之后
@@ -314,6 +318,7 @@ void solve() {
     Y -> b bY
     */
 
+    out_dbg(all_production);
     //消去单产生式:
 
 

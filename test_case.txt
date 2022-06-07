@@ -71,3 +71,24 @@ A -> bBX | bB | aCbC | abC | aCb | ab
 B -> bbb | BX | B
 X -> aX | a
 Y -> bY | b
+
+
+--- for remove unit:
+3
+S A B
+3
+S -> A
+A -> B | bS | a    
+B -> AB | epsilon
+
+remove useless and epsilon:
+
+A -> B a bS
+B -> A AB
+S -> A
+
+remove unit:
+
+A -> AB | a | bS
+B -> AB | a | bS
+S -> AB | a | bS
