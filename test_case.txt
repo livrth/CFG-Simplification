@@ -31,9 +31,9 @@ E -> eE
 9
 S A P B C D E F G
 9
-S -> a | bA | B | ccD | Pc
-A -> abB | epsilon | P
-P -> ppP | A | C | E
+S -> a | E | F | bA | B | ccD | Pc
+A -> abB | epsilon | P | F
+P -> ppP | A | C | E | G
 B -> aA
 C -> ddC | D
 D -> ddd

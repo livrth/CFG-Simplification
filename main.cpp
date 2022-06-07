@@ -110,17 +110,47 @@ void solve() {
         }
     }
 
-    //消无用式子
+    //消无用产生式
     if (!dfs(start_symbol["S"])) {
-        cout << "The final production has nothing!\n\n"; //化简后全为空，没有可达式子
+        cout << "\nThe final production has nothing!\n\n"; //化简后全为空，没有可达式子
+        system("pause");
+        return;
     }
-    else {
-        // for (int i = 1; i < number; i++)
-        // cout << start_symbol_rev[i] << ' ' << reachable[i] << endl;
-        //删去 DFS 后所有含有不可达起始符的式子
+    // for (int i = 1; i < number; i++)
+    // cout << start_symbol_rev[i] << ' ' << reachable[i] << endl;
 
+    set<string> all_unreachable;
+    for (int i = 1; i < number; i++) {
+        if (!reachable[i]) all_unreachable.insert(start_symbol_rev[i]);
     }
 
+    //删掉所有不可达开始的左边式子，然后再删右边含有不可达符号的项
+    for (auto un : all_unreachable) {
+        auto t = all_production.find(un);
+        all_production.erase(t);
+    }
+    for (auto &pro : all_production) {
+        set<string> delete_;
+        vector<string> new_right;
+        auto &to_state = pro.second;
+        for (auto it = to_state.begin(); it != to_state.end(); ++it) {
+            string now = *it;
+            for (auto c : now) {
+                if (all_unreachable.count(string(1, c))) {
+                    delete_.insert(now);
+                    break;
+                }
+            }
+        }
+        //copy and change
+        for (auto t : to_state) {
+            if (!delete_.count(t)) new_right.push_back(t);
+        }
+        pro.second = new_right;
+    }
+
+    //消空产生式
+    
 }
 
 int main() {
