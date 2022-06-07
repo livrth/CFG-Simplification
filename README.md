@@ -55,7 +55,7 @@ G -> gG | b
 
 有环情况:
 ```
-A -> B | C | D
+A -> B | C | D | c
 C -> A | E
 B -> bB
 D -> dD 
