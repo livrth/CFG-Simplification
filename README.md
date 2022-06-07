@@ -19,7 +19,7 @@ g++ main.cpp -std=c++14 -fexec-charset=GBK -o test
 - [x] Try to remove useless symbol
 
 
-__6.6 Update__
+6/7 Update:
 
 每一个起始符号可达的起始字符字母都进行 DFS,任意一项可达就是可达的。
 
@@ -33,11 +33,9 @@ E -> eE
 ```
 A 是不可达的无用式子,防止环出现就搜过的不再搜了, 而且遇到环的话返回是 false
 
-举例: A -> C, C -> A | E
+举例: A -> C, C -> A | E, 此时 C -> A 发现 A 已被标记搜过，那么这一项 DFS(A) = false
 
-此时 C -> A 发现 A 已被标记搜过，那么这一项 DFS(A)  = false
-
-然后去 DFS(E) 最后返回的结果就是 DFS(A) || DFS(E)
+然后去 DFS(E) 最后返回的结果就是 DFS(C) = DFS(A) || DFS(E)
 
 A -> A | B | C 这种应该化简为 A -> B | C, A->A 是要去掉的
 
@@ -48,17 +46,17 @@ DFS 搜索可达性, 测试样例1:
 9
 S A P B C D E F G
 9
-S->a | bA| B | ccD | Pc
-A->abB | epsilon | P
-P->ppP | A | C | E
-B->aA
-C->ddC | D
-D->ddd
-E->eE | F
-F->fF | G
-G->gG
+S -> a | bA | B | ccD | Pc
+A -> abB | epsilon | P
+P -> ppP | A | C | E
+B -> aA
+C -> ddC | D
+D -> ddd
+E -> eE | F
+F -> fF | G
+G -> gG
 ```
-输出 DFS 之后的可达性结果:
+DFS 之后的可达性结果:
 ```
 S 1
 A 1
@@ -82,7 +80,7 @@ B -> bB
 D -> dD 
 E -> eE
 ```
-输出 DFS 之后的可达性结果:
+DFS 之后的可达性结果:
 ```
 S 1
 A 1
