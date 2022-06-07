@@ -5,19 +5,6 @@ using namespace std;
 //空产生式 worst case O(N*T) T为所有文法产生式数量总和
 //单产生式 worst case O(T)
 
-/*
-S->a|bA|B|ccD
-A->abB|epsilon
-B->aA
-C->ddC
-D->ddd
------
-S->a|bA|aA|ccD|b
-A->abB
-B->aA|a
-D->ddd
-*/
-
 const int N = 50;
 int h[N], e[N], idx, ne[N];
 bool vis[N];
@@ -66,9 +53,6 @@ bool dfs(int u) {  //判断点 u 开始能否到达终结符
     // A -> B | C
     for (int i = h[u]; ~i; i = ne[i]) {
         int j = e[i];
-        // cout << start_symbol_rev[j] << ' ';
-        // if (vis[j]) continue;
-        // vis[j] = true;
         reachable[u]  |= dfs(j);
     }
     if (reachable[u]) return true;
@@ -99,7 +83,6 @@ void solve() {
         string s;
         getline(cin, s);
         string key = s.substr(0, 1);
-        // if (start_symbol.find(key) == start_symbol.end()) { //两个互相映射
 
         string temp = "";
         for (int i = 1; s[i]; i++) {
@@ -126,32 +109,15 @@ void solve() {
             }
         }
     }
-    // out_dbg(all_production);
-    // for (auto t : start_symbol) cout << t.first << ' ' << t.second << endl;
 
     //消无用式子
-    /*
-    for (auto production : all_production) {
-        auto start = production.first;
-        auto to_state_vec = production.second;
-        for (auto to_state : to_state_vec) {
-            for (auto c : to_state) {
-                if (c >= 'A' && c <= 'Z')
-                    reachable[start_symbol[start]] |= dfs(start_symbol[string(1, c)]);
-            }
-        }
-    }
-    */
-    // cout << start_symbol.size() << endl;
-    // cout << start_symbol_rev.size() << endl;
-
     if (!dfs(start_symbol["S"])) {
         cout << "The final production has nothing!\n\n"; //化简后全为空，没有可达式子
     }
     else {
-        for (int i = 1; i < number; i++)
-            cout << start_symbol_rev[i] << ' ' << reachable[i] << endl;
-        //删去 all_production 中的所有含有不可达起始符的式子
+        // for (int i = 1; i < number; i++)
+        // cout << start_symbol_rev[i] << ' ' << reachable[i] << endl;
+        //删去 DFS 后所有含有不可达起始符的式子
 
     }
 
@@ -159,5 +125,6 @@ void solve() {
 
 int main() {
     solve();
+    // system("pause");
     return 0;
 }
