@@ -20,13 +20,16 @@ void add(int a, int b) {
 }
 
 void out_dbg(map<string, vector<string> > &all_production) {
-    puts("-------------------------------------------");
+    cout << "\n化简结果如下: \n\n";
     for (auto production : all_production) {
         cout << production.first << " -> ";
         auto all_gen = production.second;
-        for (auto t : all_gen) cout << t << ' ';
-        cout << endl;
+        // for (auto t : all_gen) cout << t << ' ';
+        cout << all_gen[0];
+        for (int i = 1; i < all_gen.size(); i++) cout << " | " << all_gen[i];
+        cout << "\n";
     }
+    cout << "\n";
 }
 
 //求 epsilon 传递闭包
@@ -318,7 +321,7 @@ string dfs_unit(int u, int fa) {
     if (flag) {  //右边没有单产生式了
         string res;
         for (auto t : vec) {
-            if (t.size() > 1)
+            if (t.size() > 1 || (t.size() == 1 && t[0] >= 'a' && t[0] <= 'z'))
                 res += "#" + t;
         }
         return res;
@@ -433,7 +436,6 @@ void solve() {
 
     //消无用
     remove_useless();
-    // out_dbg(all_production);
 
     //消空
     remove_epsilon();
@@ -464,9 +466,10 @@ void solve() {
     Y -> b bY
     */
 
-    // out_dbg(all_production);
     //消去单产生式:
     remove_unit();
+
+    //输出结果
     out_dbg(all_production);
 }
 
