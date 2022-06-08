@@ -14,7 +14,7 @@ A->abB
 B->aA|a
 D->ddd
 
---- 
+--- a common case
 
 6
 S A B C D E
@@ -81,13 +81,7 @@ S -> A
 A -> B | bS | a    
 B -> AB | epsilon
 
-remove useless and epsilon:
-
-A -> B a b bS
-B -> A AB B
-S -> A
-
-remove unit:
+remove unit & final output:
 
 A -> AB | a | bS | b
 B -> AB | a | bS | b
@@ -102,3 +96,10 @@ S -> A | B | C
 A -> aa | xx | yy
 B -> bb
 C -> cc
+
+final output:
+
+A -> aa | xx | yy
+B -> bb
+C -> cc
+S -> aa | bb | cc | xx | yy
