@@ -1,14 +1,10 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-//无用符号 worst case O(N^2) N为文法行数
-//空产生式 worst case O(2^C) 需要指数枚举
-//单产生式 worst case O(T)
-
-const int N = 50, INF = 0x3f3f3f3f;
+const int N = 50;
 int h[N], e[N], idx, ne[N];
 bool reachable[N];
-int dp[N][N];  // floyd algorithm
+// int dp[N][N];  // floyd algorithm
 map<string, vector<string> > all_production;
 map<string, int> start_symbol;
 map<int, string> start_symbol_rev;
@@ -32,7 +28,7 @@ void out_dbg(map<string, vector<string> > &all_production) {
     cout << "\n";
 }
 
-//求 epsilon 传递闭包
+/*求 epsilon 传递闭包
 void floyd() {
     int n = N;
     for (int k = 0; k < n; k++)
@@ -40,6 +36,7 @@ void floyd() {
             for (int j = 0; j < n; j++)
                 dp[i][j] |= dp[i][k] && dp[k][j];
 }
+*/
 
 bool dfs(int u) {  //判断点 u 开始能否到达终结符
     if (reachable[u]) return true;
@@ -475,6 +472,6 @@ void solve() {
 
 int main() {
     solve();
-    // system("pause");
+    system("pause");
     return 0;
 }

@@ -17,6 +17,7 @@ __TODO:__
 - [x] Try to remove useless symbol
 - [x] DFS epsilon function can't return
 - [x] Remove unit production
+- [ ] Complexity Analysis
 
 
 
