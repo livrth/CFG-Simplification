@@ -177,19 +177,6 @@ void remove_epsilon() {
     }
     */
 
-    /*
-     for (auto pro : all_production) {
-         auto to_state = pro.second;
-         auto key = pro.first;
-         for (auto t : to_state) {
-             if (t == "epsilon") {
-                 all_ep.insert(key);
-                 break;
-             }
-         }
-     }
-     */
-
     //所有能链式递归推导到 epsilon 的符号
     for (int i = 1; i < number; i++) {
         if (epsilon_reachable[i]) all_ep.insert(start_symbol_rev[i]);
@@ -317,15 +304,67 @@ void rebuild_graph() {
             }
         }
     }
+}
 
-    //加上其余 epsilon 传递的关系, A -> XYX, X -> epsilon, Y -> epsilon, 那么A要加边到 epsilon
-
-    //重新求一次传递闭包 epsilon
-    // dfs_epsilon();
+string dfs_unit(int u, int fa) {
+    auto &vec = all_production[start_symbol_rev[u]];
+    bool flag = true;
+    for (auto &t : vec) {
+        if (t.size() == 1 && t[0] >= 'A' && t[0] <= 'Z' && t != start_symbol_rev[u] && start_symbol[t] != fa) {  //不要搜索自环
+            flag = false;
+            t = dfs_unit(start_symbol[t], u);
+        }
+    }
+    if (flag) {  //右边没有单产生式了
+        string res;
+        for (auto t : vec) {
+            if (t.size() > 1)
+                res += "#" + t;
+        }
+        return res;
+    }
+    return "";
 }
 
 //消除单产生式
 void remove_unit() {
+    for (auto &pro : all_production) {
+        auto &to_state = pro.second;
+        auto key = pro.first;
+        for (auto &str : to_state) {
+            // B -> B 这种就先跳过，最后再去掉这个
+            //最后替换完毕之后去重
+            if (str.size() == 1 && str[0] >= 'A' && str[0] <= 'Z' && str != key) {
+                str = dfs_unit(start_symbol[str], start_symbol[key]);
+            }
+        }
+    }
+
+    //去重以及处理字符串
+    //同时去除 B -> B 无用式
+    for (auto &pro : all_production) {
+        auto to_state = pro.second;
+        auto key = pro.first;
+        set<string> right;
+        for (auto str : to_state) {
+            //处理 '#' 符号
+            string temp = "";
+            for (auto c : str) {
+                if (c != '#')
+                    temp += string(1, c);
+                else {
+                    if (temp.size() > 0 && temp != key) {
+                        right.insert(temp);
+                        temp = "";
+                    }
+                }
+            }
+            if (temp.size() > 0 && temp != key) right.insert(temp);
+        }
+        vector<string> new_right;
+        for (auto t : right) new_right.push_back(t);
+        pro.second = new_right;
+    }
 }
 
 void solve() {
@@ -394,7 +433,7 @@ void solve() {
 
     //消无用
     remove_useless();
-    out_dbg(all_production);
+    // out_dbg(all_production);
 
     //消空
     remove_epsilon();
@@ -425,8 +464,10 @@ void solve() {
     Y -> b bY
     */
 
-    out_dbg(all_production);
+    // out_dbg(all_production);
     //消去单产生式:
+    remove_unit();
+    out_dbg(all_production);
 }
 
 int main() {

@@ -13,7 +13,7 @@ TODO:
 - [x] Think how to use graph theory to solve it
 - [x] Try to remove useless symbol
 - [x] DFS epsilon function can't return
-- [ ] remove unit production
+- [x] Remove unit production
 
 
 

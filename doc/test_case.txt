@@ -83,12 +83,22 @@ B -> AB | epsilon
 
 remove useless and epsilon:
 
-A -> B a bS
-B -> A AB
+A -> B a b bS
+B -> A AB B
 S -> A
 
 remove unit:
 
-A -> AB | a | bS
-B -> AB | a | bS
-S -> AB | a | bS
+A -> AB | a | bS | b
+B -> AB | a | bS | b
+S -> AB | a | bS | b
+
+
+--- for remove unit
+4
+S A B C
+4
+S -> A | B | C
+A -> aa | xx | yy
+B -> bb
+C -> cc
