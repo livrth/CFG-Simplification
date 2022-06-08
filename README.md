@@ -13,13 +13,14 @@ g++ main.cpp -std=c++14 -fexec-charset=GBK -o test
 ./test
 ```
 
-6/3 TODO:
+TODO:
 - [x] Review the CFG Simplification
 - [x] Think how to use graph theory to solve it
 - [x] Try to remove useless symbol
+- [x] DFS epsilon function can't return
+- [ ] remove unit production
 
-
-6/7 Update:
+--- 
 
 每一个起始符号可达的起始字符字母都进行 DFS,任意一项可达就是可达的。
 

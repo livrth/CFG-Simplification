@@ -64,13 +64,13 @@ X -> aX | a
 Y -> bY | b
 
 
-remove useless another time:
+remove useless another time, final remove epsilon:
 
-S -> XYX | XY | YX | XX | X | Y | A | B
-A -> bBX | bB | aCbC | abC | aCb | ab
-B -> bbb | BX | B
-X -> aX | a
-Y -> bY | b
+A -> aCb aCbC ab abC b bB bBX bX
+B -> B BX X bbb
+S -> A B X XX XY XYX Y YX
+X -> a aX
+Y -> b bY
 
 
 --- for remove unit:
