@@ -22,7 +22,7 @@ S A B C D E
 S -> A | B | C
 A -> Bd | Cf | D | c
 C -> A | E
-B -> bB
+B -> bB | D
 D -> dD 
 E -> eE
 
@@ -43,9 +43,9 @@ G -> gG
 
 
 --- for epsilon case
-7
-S A B X Y C D
-7
+10
+S A B X Y C D E F G
+10
 S -> XYX | A | B
 A -> bBX | aCbC
 B -> bbb | BX | D
@@ -53,6 +53,9 @@ D -> C
 X -> aX | epsilon
 Y -> bY | epsilon
 C -> epsilon
+E -> eE | F
+F -> fF | G
+G -> gG
 
 remove epsilon output:
 
