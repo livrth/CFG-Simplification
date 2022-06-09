@@ -72,7 +72,7 @@ bool epsilon_reachable[N];  				//存储字符能否到达 epsilon 空状态
 
 哈希表 `map<string, vector<string> > all_production` 存储所有的产生式，这个哈希表的 Key 值为每一行文法左边的起始字符，Value 值存储所有能从左边起始字符直接到达的产生式，这样单纯的文字描述有点抽象，我们画个图来形象化上面这个文法吧：
 
-<img src="../doc.assets/graph2.png" alt="graph" style="zoom:80%;" />
+<img src="doc/doc.assets/graph2.png" alt="graph" style="zoom:80%;" />
 
 <center style="color:#C0C0C0;text-decoration:underline">使用   csacademy.com/app/graph_editor 绘制</center>
 
@@ -446,7 +446,7 @@ S -> AB | a | b | bS
 
 这和课件中的化简结果完全一致，如下图所示：
 
-<img src="../doc.assets/image-20220609223946316.png" alt="image-20220609223946316" style="zoom: 33%;" />
+<img src="doc/doc.assets/image-20220609223946316.png" alt="image-20220609223946316" style="zoom: 33%;" />
 
 - 另外一个比较复杂的样例，涵盖了消除无用符号里面的特殊单递归式：
 
