@@ -72,7 +72,7 @@ bool epsilon_reachable[N];  				//存储字符能否到达 epsilon 空状态
 
 哈希表 `map<string, vector<string> > all_production` 存储所有的产生式，这个哈希表的 Key 值为每一行文法左边的起始字符，Value 值存储所有能从左边起始字符直接到达的产生式，这样单纯的文字描述有点抽象，我们画个图来形象化上面这个文法吧：
 
-<img src="doc/doc.assets/graph2.png" alt="graph" style="zoom:80%;" />
+<img src="doc.assets/graph2.png" alt="graph" style="zoom:80%;" />
 
 <center style="color:#C0C0C0;text-decoration:underline">使用   csacademy.com/app/graph_editor 绘制</center>
 
@@ -166,7 +166,7 @@ $$
 & G \rightarrow gG
 \end{align}
 $$
-能直接推导到达 $\epsilon$ 的起始字符有 $X,Y,C$, 然后进而得知能够到达 $X,Y,C$ 的那些字符也能到达 $\epsilon$ ，然后一直逆推下去，我们就可以直到到底有哪些符号可以递推到 $\epsilon$ 了，不过这是逆向思考，我们并不需要这样。因为已经消去了无用符号，所以目前还留在图中的点都在同一个连通块中，我们从起点 $S$ 出发正向搜索一次的效果是一样的，核心代码如下所示:
+能直接推导到达 $\epsilon$ 的起始字符有 $X,Y,C$, 然后进而得知能够到达 $X,Y,C$ 的那些字符也能到达 $\epsilon$ ，然后一直逆推下去，我们就可以知道到底有哪些符号可以递推到 $\epsilon$ 了，不过这是逆向思考，我们并不需要这样。因为已经消去了无用符号，所以目前还留在图中的点都在同一个连通块中，我们从起点 $S$ 出发正向搜索一次的效果是一样的，核心代码如下所示:
 
 ```cpp
 bool dfs_epsilon(int u) {
@@ -446,7 +446,7 @@ S -> AB | a | b | bS
 
 这和课件中的化简结果完全一致，如下图所示：
 
-<img src="doc/doc.assets/image-20220609223946316.png" alt="image-20220609223946316" style="zoom: 33%;" />
+<img src="doc.assets/image-20220609223946316.png" alt="image-20220609223946316" style="zoom: 33%;" />
 
 - 另外一个比较复杂的样例，涵盖了消除无用符号里面的特殊单递归式：
 
