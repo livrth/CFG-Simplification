@@ -2,7 +2,9 @@
 
 The simplification of context-free grammars is not a simple problem, and there are many corner cases to consider, such as various circular derivation relationships. I write about 500 lines of this program, considering the vast majority of cases, and it works correctly under the [test cases I constructed myself](https://github.com/livrth/CFG-Simplification/blob/master/doc/test_case.txt).
 
-At first I thought about using [Floyd–Warshall algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm) to implement transitive closures, but found that it was not feasible. If you think more about it, the whole process is completely recursive, in fact, the only algorithm that needs to be used is to hash the string represented by the grammar as a vertex on the graph, and then use a depth-first search. Yes, the problem of this lab only requires depth-first search, no other advanced algorithms are needed at all.
+At first I thought about using [Floyd–Warshall algorithm](https://en.wikipedia.org/wiki/Floyd%E2%80%93Warshall_algorithm) to implement transitive closures, but found that it was not feasible. If you think more about it, the whole process is completely recursive, in fact, the only algorithm that needs to be used is to hash the string represented by the grammar as a vertex on the graph, and then use a depth-first search. The problem of this lab only requires depth-first search, no other advanced algorithms are needed at all.
+
+_6/24/2022 Update: The final score of this lab is (100/100)_
 
 __Compile & Run:__
 ```bash
